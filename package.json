@@ -2,7 +2,7 @@
   "name": "counter",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://adattoweb.github.io/react-projects",
+  "homepage": "https://adattoweb.github.io/react-projects-15",
   "type": "module",
   "scripts": {
     "dev": "vite",
