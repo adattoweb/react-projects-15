@@ -1,0 +1,164 @@
+.modal{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+  }
+  .modal-contact{
+    display: inline-flex;
+  }
+  .modal-citem{
+    cursor: pointer;
+    height: 100vh;
+    min-width: 300px;
+    max-width: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .modal-citem-container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 200px;
+    transform: rotate(-90deg);
+    gap: 40px;
+  }
+  .modal-citem h3{
+    font-size: 40px;
+    color: #E3E3E3;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 600;
+    text-align: end;
+    width: 250px;
+    text-decoration: none !important;
+  }
+  .modal-citem img{
+    width: 80px;
+    height: 80px;
+  }
+  .modal-parent{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .modal-close{
+    background-color: #ffffff;
+    display: flex;
+    height: 30%;
+  }
+  .modal-close .burger-menu{
+    position: absolute;
+    top: 55px;
+    right: 20px;
+  }
+  .modal-list{
+    height: 70%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    background-color: #000000;
+  }
+  .modal-list li{
+    list-style: none;
+  }
+  .modal-list ul{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    text-align: end;
+  }
+  .modal-list li p {
+    cursor: pointer;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .modal-list li p img {
+    width: 25px;
+    height: 25px;
+    margin-right: 20px;
+  }
+  @media screen and (max-width: 1400px) {
+    .modal-citem{
+        min-width: 200px;
+        max-width: 200px;
+    }
+    .modal-citem h3{
+        font-size: 30px;
+    }
+    .modal-citem img{
+        width: 60px;
+        height: 60px;
+    }
+  }
+  @media screen and (max-width: 900px){
+    .modal-citem{
+        min-width: 150px;
+        max-width: 150px;
+    }
+    .modal-citem-container{
+        margin-bottom: 150px;
+        gap: 30px;
+    }
+    .modal-citem h3{
+        font-size: 22px;
+        width: 250px;
+    }
+    .modal-citem img{
+        width: 40px;
+        height: 40px;
+    }
+    .modal-close .burger-menu{
+        top: 35px;
+        right: 20px;
+    }
+    .modal-list ul{
+        margin-right: 20px;
+        margin-bottom: 30px;
+    }
+    .modal-list li p {
+        font-size: 24px;
+    }
+    .modal-list li p img {
+        width: 20px;
+        height: 20px;
+        margin-right: 20px;
+    }
+  }
+  @media screen and (max-width: 760px){
+    .modal-citem{
+        min-width: 100px;
+        max-width: 100px;
+    }
+    .modal-contact{
+        flex-direction: column;
+    }
+    .modal-citem-container{
+        margin-bottom: 100px;
+        gap: 20px;
+    }
+    .modal-citem h3{
+        width: auto;
+    }
+    .modal-list ul{
+        margin-right: 15px;
+        margin-bottom: 20px;
+    }
+  }
+  @media screen and (max-width: 340px){
+    .modal-citem{
+        min-width: 70px;
+        max-width: 70px;
+    }
+  }
