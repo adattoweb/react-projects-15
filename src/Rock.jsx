@@ -29,7 +29,7 @@ export default function Rock(){
         else if(playerValue === 'камінь' && botValue === 'бумага') resultik = `Поразка! Ви відповіли: ${playerValue}, бот: ${botValue}`
         else if(playerValue === 'бумага' && botValue === 'ножиці') resultik = `Поразка! Ви відповіли: ${playerValue}, бот: ${botValue}`
         else if(playerValue === 'ножиці' && botValue === 'камінь') resultik = `Поразка! Ви відповіли: ${playerValue}, бот: ${botValue}`
-        resultik = `Перемога! Ви відповіли: ${playerValue}, бот: ${botValue}`
+        else resultik = `Перемога! Ви відповіли: ${playerValue}, бот: ${botValue}`
         let date = new Date();
         localStorage.setItem(`rockitem-${rockIndex}`, `${date.getMonth()}@${date.getDate()}@${date.getHours()}@${date.getMinutes()}@${resultik}`)
         localStorage.setItem('rock-index', +rockIndex+1);
