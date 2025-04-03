@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import triangle from './assets/triangle.png'
+import triangle from '../assets/triangle.png'
 
 export default function Rock(){
     if(localStorage.getItem('rock-index') === null){

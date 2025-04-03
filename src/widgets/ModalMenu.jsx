@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './ModalMenu.css';
 
-import github from './assets/github.png';
-import telegram from './assets/telegram.png';
-import discord from './assets/discord.png';
-import polygon from './assets/polygon.png';
+import github from '../assets/github.png';
+import telegram from '../assets/telegram.png';
+import discord from '../assets/discord.png';
+import polygon from '../assets/polygon.png';
 
 export default function ModalMenu(props) {
     console.log('Modal render');

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import deleteImage from './assets/delete.png'
-import editImage from './assets/edit.png'
+import deleteImage from '../assets/delete.png'
+import editImage from '../assets/edit.png'
 
 export default function Todo(){
     const [isInput, setIsInput] = useState(false)

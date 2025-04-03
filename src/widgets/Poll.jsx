@@ -7,12 +7,15 @@ export default function Poll() {
     const rightAnswers = useRef(0)
     const [now, setNow] = useState(0)
 
+    console.log(countAnswers)
+
     const Answer = (props) => {
         const {answer, isRight} = props;
         const [isActive, setIsActive] = useState(false)
         return (
             <div className="answer" onClick={() => {
-                setIsActive(!isActive)
+                if(countAnswers.current === 0) setIsActive(!isActive)
+                else return
                 if(!isActive) { 
                     countAnswers.current +=1
                     if(isRight) rightAnswers.current +=1

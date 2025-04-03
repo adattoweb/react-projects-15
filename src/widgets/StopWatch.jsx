@@ -1,8 +1,8 @@
 import {useState, useEffect} from 'react'
 
-import start from './assets/start.png'
-import pause from './assets/pause.png'
-import restart from './assets/restart.png'
+import start from '../assets/start.png'
+import pause from '../assets/pause.png'
+import restart from '../assets/restart.png'
 
 export default function StopWatch(){
     if(localStorage.getItem('stopwatch') === null){

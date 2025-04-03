@@ -1,11 +1,11 @@
 import {useState, useEffect} from 'react'
 
-import deleteImg from './assets/delete.png'
-import editImg from './assets/edit.png'
-import triangle from './assets/triangle.png'
-import moon from './assets/moon.png'
-import sun from './assets/sun.png'
-import add from './assets/add.png'
+import deleteImg from '../assets/delete.png'
+import editImg from '../assets/edit.png'
+import triangle from '../assets/triangle.png'
+import moon from '../assets/moon.png'
+import sun from '../assets/sun.png'
+import add from '../assets/add.png'
 
 export default function SleepTime(){
     if(localStorage.getItem('sleep-last') === null){

@@ -1,5 +1,5 @@
-import github from './assets/github.png'
-import telegram from './assets/telegram.png'
+import github from '../assets/github.png'
+import telegram from '../assets/telegram.png'
 
 export default function Footer(){
     return(

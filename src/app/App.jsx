@@ -1,23 +1,24 @@
 import { useState } from 'react';
 
-import Count from './Count';
-import Trade from './Trade';
-import Timer from './Timer';
-import Todo from './Todolist';
-import Weather from './Weather';
-import Poll from './Poll';
-import StopWatch from './StopWatch';
-import Accordion from './Accordion';
-import Modal from './Modal';
-import FlashCards from './FlashCards';
-import Footer from './Footer';
-import ModalMenu from './ModalMenu';
-import Header from './Header';
-import SleepTime from './SleepTime';
-import Rock from './Rock';
-import PassGen from './PassGen';
-import PassCheck from './PassCheck';
-import Factorial from './Factorial'
+import Count from '../widgets/Count';
+import Trade from '../widgets/Trade';
+import Timer from '../widgets/Timer';
+import Todo from '../widgets/Todolist';
+import Weather from '../widgets/Weather';
+import Poll from '../widgets/Poll';
+import StopWatch from '../widgets/StopWatch';
+import Accordion from '../widgets/Accordion';
+import Modal from '../widgets/Modal';
+import FlashCards from '../widgets/FlashCards';
+import Footer from '../widgets/Footer';
+import ModalMenu from '../widgets/ModalMenu';
+import Header from '../widgets/Header';
+import SleepTime from '../widgets/SleepTime';
+import Rock from '../widgets/Rock';
+import PassGen from '../widgets/PassGen';
+import PassCheck from '../widgets/PassCheck';
+import Factorial from '../widgets/Factorial'
+
 import './App.css';
 import './App-adaptive.css';
 
@@ -76,6 +77,7 @@ export default function App() {
                 <>
                     <Header onBurgerClick={() => setIsModalMenu(true)} />
                     <div className="content">
+                        {!isCount && !isTrade && !isTimer && !isTodo && !isWeather && !isPoll && !isStopWatch && !isAccordion && !isModalBtn && !isModal && !isFlashCards && !isSleepTime && !isRock && !isPass && !isPassCheck && !isFactorial && <p>Натисніть на меню, щоб викликати компоненти.</p>}
                         {isCount && <Count />}
                         {isTrade && <Trade />}
                         {isTimer && <Timer />}
