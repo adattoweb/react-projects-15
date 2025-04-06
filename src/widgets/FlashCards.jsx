@@ -14,8 +14,7 @@ export default function FlashCards(){
         return (
             <div className="flashitem">
                 <h4>{iquestion}</h4>
-                {iimageurl.length !== 0 && <img src={iimageurl} alt="Зображення" />} {//https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Eo_circle_red_number-2.svg/768px-Eo_circle_red_number-2.svg.png
-                }
+                {iimageurl.length !== 0 && <img src={iimageurl} alt="Зображення" />} {/*https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Eo_circle_red_number-2.svg/768px-Eo_circle_red_number-2.svg.png*/}
                 {isAnswer && <p>{ianswer}</p>}
                 <div className="flashitem__buttons">
                     <div className="flashcard__button" onClick={() => setIsAnswer(!isAnswer)}>Відповідь</div>
@@ -31,7 +30,7 @@ export default function FlashCards(){
                 setErrorText('Введіть дані!');
             } else{
             setErrorText('Успішна операція!')
-            localStorage.setItem(`flash-${answer}`, `${question}!${answer}!${imageurl}`)
+            localStorage.setItem(`flash-${question}`, `${question}!${answer}!${imageurl}`)
             }
         }
     }, [change])
@@ -45,7 +44,7 @@ export default function FlashCards(){
             }
         })
         setFlashArr(loadedArr)
-    }, [])
+    }, [isEdit])
     return (
         <div className="flashcard__parent block">
             {!isEdit && <p onClick={() => setIsEdit(true)} className="editing">Режим редагування</p> }
