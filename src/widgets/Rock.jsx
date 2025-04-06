@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState, useRef, useEffect } from 'react'
 import triangle from '../assets/triangle.png'
 
 export default function Rock(){
@@ -36,6 +36,10 @@ export default function Rock(){
         setRockIndex(localStorage.getItem('rock-index'))
         setResult(resultik)
     }
+    const count = useRef(0)
+    useEffect(() => {
+        count.current = 0
+    }, [isRotate])
     return (
         <div className="rock block">
             <div className="rock__inputs">
@@ -60,16 +64,20 @@ export default function Rock(){
                         })
                         .map((el, index) => {
                             let now = localStorage.getItem(el).split("@");
-                            return (
-                                <RockItem
-                                    key={`${index}${now[2]}${now[3].padStart(2, "0")}${now[1]}${now[0]}${now[4]}`}
-                                    date={`${now[2]}:${now[3].padStart(
-                                        2,
-                                        "0"
-                                    )} ${now[1]}.${now[0]}`}
-                                    result={now[4]}
-                                />
-                            );
+                            if(++count.current <= 20) { // відображаємо останні 20 елементів
+                                return (
+                                    <RockItem
+                                        key={`${index}${now[2]}${now[3].padStart(2, "0")}${now[1]}${now[0]}${now[4]}`}
+                                        date={`${now[2]}:${now[3].padStart(
+                                            2,
+                                            "0"
+                                        )} ${now[1]}.${now[0]}`}
+                                        result={now[4]}
+                                    />
+                                );
+                            } else {
+                                localStorage.removeItem(el) // інші видаляємо
+                            }
                         })}
             </div>
         </div>

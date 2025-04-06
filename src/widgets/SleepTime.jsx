@@ -112,7 +112,6 @@ export default function SleepTime(){
     const [result, setResult] = useState('')
 
     useEffect(() => {
-        let arrEnd = end.split('!');
         if(!end.includes('??')){
         
         let arr1 = start.split('-')[0].split('!')
