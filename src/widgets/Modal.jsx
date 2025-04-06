@@ -19,8 +19,8 @@ export default function Modal({ children, isModal }) {
       <div className={`modalone ${animationClass}`}>
         <h3>{children}</h3>
         <div className="modalone__menu">
-          <div className="modalone__button">Так</div>
-          <div className="modalone__button ">Ні</div>
+          <div className="modalone__button" onClick={() => setIsVisible(false)}>Так</div>
+          <div className="modalone__button" onClick={() => setIsVisible(false)}>Ні</div>
         </div>
       </div>
     )

@@ -3,64 +3,42 @@ import poll from './poll.json'
 
 export default function Poll() {
     const allAnswers = useRef(0)
-    const countAnswers = useRef(0)
     const rightAnswers = useRef(0)
     const [now, setNow] = useState(0)
 
-    console.log(countAnswers)
 
     const Answer = (props) => {
-        const {answer, isRight} = props;
-        const [isActive, setIsActive] = useState(false)
+        const {answer, onClick, isActive} = props;
         return (
-            <div className="answer" onClick={() => {
-                if(countAnswers.current === 0) setIsActive(!isActive)
-                else return
-                if(!isActive) { 
-                    countAnswers.current +=1
-                    if(isRight) rightAnswers.current +=1
-                }
-                else {
-                    countAnswers.current -=1
-                    if(isRight) rightAnswers.current -=1;
-                }
-            }}>
+            <div className="answer" onClick ={onClick}>
                 <div className={isActive ? "answer__circle active" : "answer__circle"}></div>
                 <p>{answer}</p>
             </div>
         )
     }
-
-    const [errorText, setErrorText] = useState('')
+    const [choosed, setChoosed] = useState(-1)
     const nextQuest = () => {
-        if(countAnswers.current !== 1){
-            if(!errorText.includes('Виберіть одну відповідь')) {
-                countAnswers.current = 0;
-                rightAnswers.current -=1;
-            }
-            setErrorText('Виберіть одну відповідь!')
-            return false;
-        }
-        countAnswers.current = 0;
-        setErrorText('')
+        if(choosed === poll[now].rightIndex) rightAnswers.current++
         allAnswers.current +=1;
         setNow(now+1)
+        setChoosed(-1)
     }
-
     const Quest = (props) => {
-        const {children, question} = props;
+        const { question } = props;
         return (
             <div className="quest">
-                <h3>{question}</h3>
+                <h3>{question.question}</h3>
                 <div className="quest__list">
-                    {children}
+                    {question.answers.map((childEl, index) => {
+                        return <Answer key={index} answer={childEl} onClick={() => {
+                            setChoosed(index)
+                        }} isActive = {choosed === index}/>
+                    })}
                 </div>
-                {errorText.length > 1 && <p className="error">{errorText}</p>}
                 <div className="quest__button" onClick={nextQuest}>Далі</div>
             </div>
         )
     }
-
     return (
         <div className="poll__parent block">
             {now >= poll.length ? 
@@ -74,11 +52,7 @@ export default function Poll() {
                     }}>Спочатку</div>
             </div>
             :
-            <Quest question={poll[now].question}>
-                {poll[now].answers.map((childEl, index) => {
-                    return <Answer key={index} answer={childEl} isRight={index === poll[now].rightIndex ? true : false}/>
-                })}
-            </Quest>}
+            <Quest question={poll[now]}/>}
         </div>
     )
 }
