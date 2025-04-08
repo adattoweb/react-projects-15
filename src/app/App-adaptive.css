@@ -150,8 +150,9 @@
     .timer__parent{
       width: 80vw;
     }
-
-
+    .todoitem__inputs input{
+      width: 125px;
+    }
     .accordion__parent{
       width: 90vw;
     }

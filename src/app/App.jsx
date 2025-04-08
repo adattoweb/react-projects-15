@@ -69,7 +69,7 @@ export default function App() {
                     onBurgerClick={() => setIsModalMenu(false)}
                     isNeed={isModalMenu}
                     arrFuncs={toggleFunctions}
-                    names={'Count!Trade!Timer!TodoList!Weather!Poll!StopWatch!Accordion!Modal!FlashCards!SleepTreker!RSP!PassGen!PassCheck!Factorial'}
+                    arrNames={["Count","Trade","Timer","TodoList","Weather","Poll","StopWatch","Accordion","Modal","FlashCards","SleepTracker","RSP","PassGen","PassCheck","Factorial"]}
                     activeItems={activeItems}
                     setActiveItems={setActiveItems} // Передаємо функцію для зміни стану активних елементів
                 />

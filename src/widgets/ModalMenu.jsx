@@ -8,8 +8,7 @@ import polygon from '../assets/polygon.png';
 
 export default function ModalMenu(props) {
     console.log('Modal render');
-    const { isNeed, onBurgerClick, arrFuncs, names, activeItems, setActiveItems } = props;
-    const arrNames = names.split('!');
+    const { isNeed, onBurgerClick, arrFuncs, arrNames, activeItems, setActiveItems } = props;
 
     if (!isNeed) return null;
 
