@@ -1,7 +1,7 @@
 {
-  "name": "counter",
+  "name": "rp15",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.6",
   "homepage": "https://adattoweb.github.io/react-projects-15",
   "type": "module",
   "scripts": {
