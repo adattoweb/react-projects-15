@@ -1,14 +1,27 @@
 import { useState, useRef } from 'react'
 import poll from './poll.json'
 
-export default function Poll() {
+type AnswerProps = {
+    answer: string;
+    onClick: () => void;
+    isActive: boolean;
+}
+
+type QuestProps = {
+    question: {
+        question: string;
+        answers: string[];
+        rightIndex: number;
+    }
+}
+ 
+export default function Poll(): JSX.Element {
     const allAnswers = useRef(0)
     const rightAnswers = useRef(0)
-    const [now, setNow] = useState(0)
+    const [now, setNow] = useState<number>(0)
 
 
-    const Answer = (props) => {
-        const {answer, onClick, isActive} = props;
+    const Answer = ({ answer, onClick, isActive }:AnswerProps): JSX.Element => {
         return (
             <div className="answer" onClick ={onClick}>
                 <div className={isActive ? "answer__circle active" : "answer__circle"}></div>
@@ -16,15 +29,15 @@ export default function Poll() {
             </div>
         )
     }
-    const [choosed, setChoosed] = useState(-1)
+    const [choosed, setChoosed] = useState<number>(-1)
     const nextQuest = () => {
         if(choosed === poll[now].rightIndex) rightAnswers.current++
         allAnswers.current +=1;
         setNow(now+1)
         setChoosed(-1)
     }
-    const Quest = (props) => {
-        const { question } = props;
+    const Quest = ({ question }: QuestProps): JSX.Element => {
+        console.log(question)
         return (
             <div className="quest">
                 <h3>{question.question}</h3>

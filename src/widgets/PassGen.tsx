@@ -1,13 +1,13 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
-export default function PassGen(){
-    const [result, setResult] = useState('')
-    const [passLen, setPassLen] = useState('')
-    const [isLetters, setIsLetters] = useState(false)
-    const [isNumbers, setIsNumbers] = useState(false)
-    const [isSpecial, setIsSpecial] = useState(false)
-    const [isCaps, setIsCaps] = useState(false)
-    const genPass = () => {
+export default function PassGen() :JSX.Element{
+    const [result, setResult] = useState<string>('')
+    const [passLen, setPassLen] = useState<string>('')
+    const [isLetters, setIsLetters] = useState<boolean>(false)
+    const [isNumbers, setIsNumbers] = useState<boolean>(false)
+    const [isSpecial, setIsSpecial] = useState<boolean>(false)
+    const [isCaps, setIsCaps] = useState<boolean>(false)
+    const genPass = (): void => {
         if(!isLetters && !isNumbers && !isSpecial) setResult('Оберіть 1 чекбокс хоча б.')
         else if(!passLen || +passLen > 300) setResult('Щось не так з полем довжина паролю. Макс. значення: 300')
         else {
@@ -18,7 +18,7 @@ export default function PassGen(){
             if(isSpecial) str+= '!@#$%^&*()?!@#$%^&*()?++--'
             if(isCaps) str += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             let res = '';
-            for(let i = 0; i < passLen; i++){
+            for(let i = 0; i < +passLen; i++){
                 res += str[Math.floor(Math.random() * str.length)]
             }
             setResult(`Ваш пароль: ${res}`)

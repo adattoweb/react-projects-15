@@ -1,23 +1,30 @@
-import {useState, useEffect} from 'react'
+import  { useState, useEffect } from 'react'
 
-export default function PassCheck(){
-    const [userPass, setUserPass] = useState('')
-    const [result, setResult] = useState('Вставте пароль')
+type IsUsingType = {
+    numbers: boolean;
+    letters: boolean;
+    caps: boolean;
+    special: boolean;
+}
+
+export default function PassCheck(): JSX.Element{
+    const [userPass, setUserPass] = useState<string>('')
+    const [result, setResult] = useState<string>('Напишіть пароль')
     useEffect(() => {
-        const isUsing = {
+        const isUsing: IsUsingType = {
             numbers: false,
             letters: false,
             caps: false,
             special: false
         }
-        let balls = 0;
+        let balls:number = 0;
         balls += userPass.length * 2
-        let letters = 'abcdefghijklmnopqrstuvwxyz'
-        let caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        let numbers = '0123456789'
-        let special = '!@#$%^&*()?/{}[]+-'
+        const letters = 'abcdefghijklmnopqrstuvwxyz'
+        const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        const numbers = '0123456789'
+        const special = '!@#$%^&*()?/{}[]+-'
         let blackStr = ''
-        let badPass = ['12345678', 'qwerty123', 'qwerty', '1234', '12345', '1234567890', '123456', '1234567', '12345678', '123456789', '1', '12', '123']
+        const badPass:readonly string[] = ['12345678', 'qwerty123', 'qwerty', '1234', '12345', '1234567890', '123456', '1234567', '12345678', '123456789', '1', '12', '123']
         for(let i = 0; i < userPass.length; i++){
             if(letters.includes(userPass[i])){
                 if(!blackStr.includes(userPass[i])){

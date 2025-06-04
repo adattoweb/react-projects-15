@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Header(props){
+type HeaderProps = {
+    onBurgerClick: () => void;
+}
 
-    const {onBurgerClick} = props;
+export default function Header({ onBurgerClick }:HeaderProps): JSX.Element{
 
-    const [isHidden, setIsHidden] = useState(false)
-    const [lastScroll, setLastScroll] = useState(0)
+    const [isHidden, setIsHidden] = useState<boolean>(false)
+    const [lastScroll, setLastScroll] = useState<number>(0)
 
     const scroll = () => {
-        const currentScroll = window.scrollY;
+        const currentScroll:number = window.scrollY;
         if(currentScroll > lastScroll && currentScroll > 50){
             setIsHidden(true)
         } else {

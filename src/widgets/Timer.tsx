@@ -1,10 +1,10 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 
-export default function Timer(){
-    const [timer, setTimer] = useState(0)
-    const [selectedValue, setSelectedValue] = useState("0.166666666666")
-    const [isZero, setIsZero] = useState(true)
-    const sound = new Audio("/timer.mp3");
+export default function Timer() :JSX.Element{
+    const [timer, setTimer] = useState<number>(0)
+    const [selectedValue, setSelectedValue] = useState<string>("0.166666666666")
+    const [isZero, setIsZero] = useState<boolean>(true)
+    const sound: HTMLAudioElement = new Audio("/react-projects-15/src/assets/timer.mp3");
     useEffect(() => {
         if(timer === 0 && isZero === false) {
             sound.play();

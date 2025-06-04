@@ -2,24 +2,32 @@ import { useState, useEffect } from 'react'
 import deleteImage from '../assets/delete.png'
 import editImage from '../assets/edit.png'
 
-export default function Todo(){
-    const [isInput, setIsInput] = useState(false)
-    const [name, setName] = useState('')
-    const [desc, setDesc] = useState('')
-    const [todos, setTodos] = useState([])
-    const [change, setChange] = useState(false)
-    if(localStorage.getItem('index') === null) localStorage.setItem('index', '0')
-    const index = localStorage.getItem('index')
+type TodoItemProps = {
+    name: string;
+    desc: string;
+    index: number;
+    modActive: boolean;
+}
 
-    const addItem = () => {
+export default function Todo(): JSX.Element{
+    const [isInput, setIsInput] = useState<boolean>(false)
+    const [name, setName] = useState<string>('')
+    const [desc, setDesc] = useState<string>('')
+    const [todos, setTodos] = useState<TodoItemProps[]>([])
+    const [change, setChange] = useState<boolean>(false)
+    const localIndex = localStorage.getItem('index')
+    if(!localIndex) localStorage.setItem('index', '0')
+    const index: number = !localIndex ? 0 : +localIndex
+
+    const addItem = (): void => {
         let updatedDesc = desc;
         let updatedName = name;
 
-        if (desc.length < 2) updatedDesc = 'Без опису';
-        if (name.length < 2) updatedName = 'Без назви';
+        if (desc.length < 1) updatedDesc = 'Без опису';
+        if (name.length < 1) updatedName = 'Без назви';
 
         localStorage.setItem(`todo-${index}`, `${updatedName}!${updatedDesc}!false`);
-        localStorage.setItem('index', +index +1)
+        localStorage.setItem('index', (index+1)+"")
 
         setDesc(updatedDesc);
         setName(updatedName);
@@ -27,23 +35,23 @@ export default function Todo(){
         setChange(!change)
     }
 
-    const TodoItem = (props) => {
+    const TodoItem = ({ name, desc, index, modActive }:TodoItemProps): JSX.Element => {
+        if(modActive === undefined) modActive = true
         console.log('TodoItem render')
-        const {name, desc, id, active = false} = props;
-        const [isActive, setIsActive] = useState(active)
-        const [isEdit, setIsEdit] = useState(false)
-        const [newName, setNewName] = useState(name)
-        const [newDesc, setNewDesc] = useState(desc)
+        const [isActive, setIsActive] = useState<boolean>(modActive)
+        const [isEdit, setIsEdit] = useState<boolean>(false)
+        const [newName, setNewName] = useState<string>(name)
+        const [newDesc, setNewDesc] = useState<string>(desc)
 
-        const deleteItem = () => {
-            localStorage.removeItem(`todo-${id}`)
+        const deleteItem = ():void => {
+            localStorage.removeItem(`todo-${index}`)
             setChange(!change)
         }
 
-        const saveChanges = (updatedActive = isActive) => {
+        const saveChanges = (updatedActive: boolean = isActive):void => {
             if (newName && newDesc) {
-                console.log(updatedActive, active)
-                localStorage.setItem(`todo-${id}`, `${newName}!${newDesc}!${updatedActive}`);
+                console.log(updatedActive, modActive)
+                localStorage.setItem(`todo-${index}`, `${newName}!${newDesc}!${updatedActive}`);
                 setIsEdit(false);
                 setChange(!change);
             }
@@ -51,7 +59,7 @@ export default function Todo(){
         return (
             <div className="todoitem">
                 <div className={isActive ? "todoitem__circle active" : "todoitem__circle"} onClick={() => {
-                    setIsActive((prevActive) => {
+                    setIsActive((prevActive: boolean):boolean => {
                         const updatedActive = !prevActive;
                         saveChanges(updatedActive);
                         return updatedActive; 
@@ -79,25 +87,27 @@ export default function Todo(){
         )
     }
     useEffect(() => {
-        const loadedTodos = []
+        const loadedTodos: TodoItemProps[] = []
         for(let el in localStorage){
             if(el.includes('todo')){
-                let id = el.split('-')[1]
-                if(localStorage.getItem(el)){
-                    const [name, desc, active] = localStorage.getItem(el).split('!')
+                let index = +el.split('-')[1]
+                const localEl = localStorage.getItem(el)
+                if(localEl){
+                    const [name, desc, active] = !localEl ? ["name", "desc", "active"] : localEl.split('!')
                     let modActive = active.includes('true')
-                    loadedTodos.push({name, desc, modActive, id})
+                    loadedTodos.push({name, desc, index, modActive})
                 }
             }
         }
         setTodos(loadedTodos)
     }, [change])
-    todos.sort((a,b) => a.id - b.id).reverse()
+    console.log(todos)
+    todos.sort((a,b) => a.index - b.index).reverse()
     return (
         <div className="todo__parent block">
             <div className="todo__list">
             {todos.map((todo, index) => (
-                <TodoItem name={todo.name} desc={todo.desc} id={todo.id} key={todo.index} active={todo.modActive} />
+                <TodoItem name={todo.name} desc={todo.desc} index={todo.index} key={todo.index} modActive={todo.modActive} />
             ))}
             </div>
             <div className="todomenu">

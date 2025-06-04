@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "resolveJsonModule": true,
+      "target": "es2017",
+      "module": "ESNext",
+      "jsx": "react-jsx",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node"
+    },
+    "include": ["src", "src/types"]
+}

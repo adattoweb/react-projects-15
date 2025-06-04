@@ -23,26 +23,26 @@ import './App.css';
 import './App-adaptive.css';
 
 export default function App() {
-    const [isCount, setIsCount] = useState(false);
-    const [isTrade, setIsTrade] = useState(false);
-    const [isTimer, setIsTimer] = useState(false);
-    const [isTodo, setIsTodo] = useState(false);
-    const [isWeather, setIsWeather] = useState(false);
-    const [isPoll, setIsPoll] = useState(false);
-    const [isStopWatch, setIsStopWatch] = useState(false);
-    const [isAccordion, setIsAccordion] = useState(false);
-    const [isModalBtn, setIsModalBtn] = useState(false);
-    const [isModal, setIsModal] = useState(false);
-    const [isFlashCards, setIsFlashCards] = useState(false);
-    const [isSleepTime, setIsSleepTime] = useState(false);
-    const [isRock, setIsRock] = useState(false)
-    const [isPass, setIsPass] = useState(false)
-    const [isPassCheck, setIsPassCheck] = useState(false)
-    const [isFactorial, setIsFactorial] = useState(false)
+    const [isCount, setIsCount] = useState<boolean>(false);
+    const [isTrade, setIsTrade] = useState<boolean>(false);
+    const [isTimer, setIsTimer] = useState<boolean>(false);
+    const [isTodo, setIsTodo] = useState<boolean>(false);
+    const [isWeather, setIsWeather] = useState<boolean>(false);
+    const [isPoll, setIsPoll] = useState<boolean>(false);
+    const [isStopWatch, setIsStopWatch] = useState<boolean>(false);
+    const [isAccordion, setIsAccordion] = useState<boolean>(false);
+    const [isModalBtn, setIsModalBtn] = useState<boolean>(false);
+    const [isModal, setIsModal] = useState<boolean>(false);
+    const [isFlashCards, setIsFlashCards] = useState<boolean>(false);
+    const [isSleepTime, setIsSleepTime] = useState<boolean>(false);
+    const [isRock, setIsRock] = useState<boolean>(false)
+    const [isPass, setIsPass] = useState<boolean>(false)
+    const [isPassCheck, setIsPassCheck] = useState<boolean>(false)
+    const [isFactorial, setIsFactorial] = useState<boolean>(false)
 
-    const [isModalMenu, setIsModalMenu] = useState(false);
+    const [isModalMenu, setIsModalMenu] = useState<boolean>(false);
 
-    const [activeItems, setActiveItems] = useState([]);
+    const [activeItems, setActiveItems] = useState<number[]>([]); // пізніше
 
     const toggleFunctions = [
         () => setIsCount((prev) => !prev),

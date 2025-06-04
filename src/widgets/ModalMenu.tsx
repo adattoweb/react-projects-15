@@ -1,19 +1,33 @@
-import { useState } from 'react';
 import './ModalMenu.css';
 
 import github from '../assets/github.png';
 import telegram from '../assets/telegram.png';
 import discord from '../assets/discord.png';
 import polygon from '../assets/polygon.png';
+import { ReactNode } from 'react';
 
-export default function ModalMenu(props) {
+type MenuProps = {
+    isNeed: boolean;
+    onBurgerClick: () => void;
+    arrFuncs: (() => void)[]
+    arrNames: string[];
+    activeItems: number[];
+    setActiveItems: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+type NavModalProps = {
+    children: ReactNode;
+    index: number;
+    onClick: () => void;
+}
+
+export default function ModalMenu({ isNeed, onBurgerClick, arrFuncs, arrNames, activeItems, setActiveItems }: MenuProps) {
     console.log('Modal render');
-    const { isNeed, onBurgerClick, arrFuncs, arrNames, activeItems, setActiveItems } = props;
 
     if (!isNeed) return null;
 
     // Дочірній компонент для навігації
-    const NavModal = ({ children, index, onClick }) => {
+    const NavModal = ({ children, index, onClick }: NavModalProps) => {
         const isActive = activeItems.includes(index); // Перевіряємо, чи цей елемент активний
 
         const toggleActive = () => {
@@ -26,6 +40,7 @@ export default function ModalMenu(props) {
             });
             onClick(); // Викликаємо onClick, що передається в компонент
         };
+        console.log(arrFuncs)
 
         return (
             <li onClick={toggleActive}>

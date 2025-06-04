@@ -1,7 +1,7 @@
 import github from '../assets/github.png'
 import telegram from '../assets/telegram.png'
 
-export default function Footer(){
+export default function Footer():JSX.Element{
     return(
         <footer className="footer">
             <div className="footer-one">

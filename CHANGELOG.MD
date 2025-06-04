@@ -13,3 +13,5 @@
 - Updated the poll: now only one answer can be selected and the amount of code has been reduced.
 ## Version 1.0.5
 - Updated the adaptive of todolist.
+## Version 1.0.6
+- All components are typed with TypeScript.

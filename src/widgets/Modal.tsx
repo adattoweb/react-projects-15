@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 
-export default function Modal({ children, isModal }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [animationClass, setAnimationClass] = useState("");
+type ModalProps = {
+  children: ReactNode;
+  isModal: boolean;
+}
+
+export default function Modal({ children, isModal }:ModalProps): boolean | JSX.Element {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [animationClass, setAnimationClass] = useState<string>("");
 
   useEffect(() => {
     if (isModal) {

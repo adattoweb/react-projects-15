@@ -1,11 +1,11 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-export default function Weather(){
+export default function Weather() :JSX.Element{
 
-    const [isDetail, setIsDetail] = useState(false)
-    const [city, setCity] = useState('Kyiv')
-    const [data, setData] = useState(null)
-    const [change, setChange] = useState(false)
+    const [isDetail, setIsDetail] = useState<boolean>(false)
+    const [city, setCity] = useState<string>('Kyiv')
+    const [data, setData] = useState<any>(null)
+    const [change, setChange] = useState<boolean>(false)
     const apiKey = '0b2c4c40a5abb371c86d59d1c936eadf'
     
     useEffect(() => {

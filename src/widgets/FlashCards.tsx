@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react'
 
+type FlashItemProps = {
+    iquestion: string;
+    ianswer: string;
+    iimageurl: string;
+}
+
+type FlashArrType = string[][]
+
 export default function FlashCards(){
-    const [answer, setAnswer] = useState('')
-    const [question, setQuestion] = useState('')
-    const [imageurl, setImageurl] = useState('')
-    const [change, setChange] = useState(0)
-    const [errorText, setErrorText] = useState('')
-    const [flashArr, setFlashArr] = useState([])
-    const [flashIndex, setFlashIndex] = useState(0)
-    const [isEdit, setIsEdit] = useState(true)
-    const FlashItem = ({iquestion, ianswer, iimageurl}) => {
+    const [answer, setAnswer] = useState<string>('')
+    const [question, setQuestion] = useState<string>('')
+    const [imageurl, setImageurl] = useState<string>('')
+    const [change, setChange] = useState<number>(0)
+    const [errorText, setErrorText] = useState<string>('')
+    const [flashArr, setFlashArr] = useState<FlashArrType>([])
+    const [flashIndex, setFlashIndex] = useState<number>(0)
+    const [isEdit, setIsEdit] = useState<boolean>(true)
+    const FlashItem = ({ iquestion, ianswer, iimageurl }: FlashItemProps) => {
         const [isAnswer, setIsAnswer] = useState(false)
         return (
             <div className="flashitem">
@@ -35,10 +43,11 @@ export default function FlashCards(){
         }
     }, [change])
     useEffect(() => {
-        let loadedArr = []
+        let loadedArr: FlashArrType = []
         Object.keys(localStorage).map(el => {
             if(el.includes('flash')){
-                let arr = localStorage.getItem(el).split('!')
+                const localEl = localStorage.getItem(el)
+                let arr = !localEl ? [] : localEl.split('!')
                 console.log(arr)
                 loadedArr.push(arr)
             }

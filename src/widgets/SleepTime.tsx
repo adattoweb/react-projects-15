@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 
 import deleteImg from '../assets/delete.png'
 import editImg from '../assets/edit.png'
@@ -7,30 +7,48 @@ import moon from '../assets/moon.png'
 import sun from '../assets/sun.png'
 import add from '../assets/add.png'
 
-export default function SleepTime(){
-    if(localStorage.getItem('sleep-last') === null){
+type HistoryItemType = {
+    emins: string;
+    ehours: string;
+    eday: string;
+    emonth: string;
+    smins: string;
+    shours: string;
+    sday: string;
+    smonth: string;
+    id: string;
+}
+type StatProps = Omit<HistoryItemType, "id"> & {
+    children: ReactNode;
+    index: string;
+}
+
+export default function SleepTime() :JSX.Element{
+    if(!localStorage.getItem('sleep-last')){
         localStorage.setItem('sleep-last', '22!00!14!12-23!05!15!12')
     }
-    if(localStorage.getItem('sleep-index') === null){
+    if(!localStorage.getItem('sleep-index')){
         localStorage.setItem('sleep-index', '1')
     }
-    const [isHistory, setIsHistory] = useState(false)
-    const [start, setStart] = useState(localStorage.getItem('sleep-last'))
-    const [end, setEnd] = useState(localStorage.getItem('sleep-last').split('-')[1])
-    const [change, setChange] = useState(0)
-    const [historyArr, setHistoryArr] = useState([])
+    const localLast = localStorage.getItem('sleep-last')
+    const localIndex = localStorage.getItem('sleep-index')
+    const [isHistory, setIsHistory] = useState<boolean>(false)
+    const [start, setStart] = useState<string>(!localLast ? "" : localLast)
+    const [end, setEnd] = useState<string>(!localLast ? "" : localLast.split('-')[1])
+    const [change, setChange] = useState<number>(0)
+    const [historyArr, setHistoryArr] = useState<HistoryItemType[]>([])
     const [error, setError] = useState('')
     console.log(start, end)
-    if(!localStorage.getItem('sleep-last').includes('-')){
+    // @ts-ignore
+    if(!localLast.includes('-')){ // скаржиться на null, але він null дорівнювати не може!!!
         localStorage.setItem('sleep-last', `${localStorage.getItem('sleep-last')}-??!??!??!??`)
+        // @ts-ignore
         setEnd(localStorage.getItem('sleep-last').split('-')[1])
     }
-
-    const StatItem = (props) => {
+    const StatItem = ({ shours, smins, sday,smonth,ehours, emins, eday, emonth, children, index }: StatProps) :JSX.Element => {
         const [isEdit, setIsEdit] = useState(false)
         const [startValue, setStartValue] = useState('')
         const [endValue, setEndValue] = useState('')
-        const {shours, smins, sday,smonth,ehours, emins, eday, emonth, children, index} = props;
         const deleteItem = () => {
             localStorage.removeItem(`sleep-item-${index}`)
             setChange(change + 1)
@@ -40,11 +58,12 @@ export default function SleepTime(){
             if(isEdit === true && startValue.length >= 4 && startValue.includes(':') && endValue.length >= 4 && endValue.includes(':') && startValue.length < 6 && endValue.length < 6 && !startValue.includes('!') && !endValue.includes('!')){
                 setError('')
                 console.log(index)
-                let lastArr = localStorage.getItem(`sleep-item-${index}`).split('-').map(el => el.split('!'))
-                let startDate = [lastArr[0][2], lastArr[0][3]]
-                let endDate = [lastArr[1][2], lastArr[1][3]]
+                // @ts-ignore
+                let lastArr: string[][] = localStorage.getItem(`sleep-item-${index}`).split('-').map(el => el.split('!'))
+                let startDate: string[] = [lastArr[0][2], lastArr[0][3]]
+                let endDate: string[] = [lastArr[1][2], lastArr[1][3]]
                 if(+endValue.split(':')[0] < +startValue.split(':')[0]) {
-                    endDate = [+lastArr[1][2]+1, lastArr[1][3]]
+                    endDate = [(+lastArr[1][2]+1) + "", lastArr[1][3]]
                     console.log(endDate)
                 } else {
                     endDate = [lastArr[0][2], lastArr[1][3]]
@@ -76,20 +95,27 @@ export default function SleepTime(){
     const startSleep = () => {
         let date = new Date;
         localStorage.setItem('sleep-last',`${date.getHours()}!${date.getMinutes()}!${date.getDate()}!${date.getMonth() + 1}`)
+        // @ts-ignore
         setStart(localStorage.getItem('sleep-last'))
     }
     const endSleep = () => {
         let date = new Date;
+        // @ts-ignore
         console.log(localStorage.getItem('sleep-last').split('-').join('-'))
+        // @ts-ignore
         localStorage.setItem('sleep-last', `${localStorage.getItem('sleep-last').replace('-??!??!??!??', '')}`)
+        // @ts-ignore
         if(localStorage.getItem('sleep-last').includes('end')){
+            // @ts-ignore
             localStorage.setItem('sleep-last', localStorage.getItem('sleep-last').split('-')[0])
         }
         localStorage.setItem('sleep-last', `${localStorage.getItem('sleep-last')}-${date.getHours()}!${date.getMinutes()}!${date.getDate()}!${date.getMonth() + 1}!end`)
+        // @ts-ignore
         setEnd(localStorage.getItem('sleep-last').split('-')[1])
     }
     const addSleep = () => {
         localStorage.setItem(`sleep-item-${localStorage.getItem('sleep-index')}`, `${localStorage.getItem('sleep-last')}`)
+        // @ts-ignore
         localStorage.setItem('sleep-index', +localStorage.getItem('sleep-index') + 1)
         setChange(change + 1)
     }
@@ -100,13 +126,17 @@ export default function SleepTime(){
             if(el.includes('sleep-item')){
                 let id = el.replace('sleep-item-', '')
                 if(localStorage.getItem(el)){
+                    // @ts-ignore
                     let twoArr = localStorage.getItem(el).split('-')
-                    const [shours, smins, sday, smonth] = twoArr[0].split('!')
-                    const [ehours, emins, eday, emonth] = twoArr[1].split('!')
-                    loadedSleeps.push({shours, smins, sday, smonth, ehours, emins, eday, emonth, id})
+                    if(twoArr[1]) {
+                        const [shours, smins, sday, smonth] = twoArr[0].split('!')
+                        const [ehours, emins, eday, emonth] = twoArr[1].split('!')
+                        loadedSleeps.push({shours, smins, sday, smonth, ehours, emins, eday, emonth, id})
+                    }
                 }
             }
         }
+        console.log(loadedSleeps)
         setHistoryArr(loadedSleeps)
     }, [change])
     const [result, setResult] = useState('')
@@ -142,7 +172,7 @@ export default function SleepTime(){
             <div className="sleeptime__stats">
                 <h4 onClick={() => setIsHistory(!isHistory)}>Історія <img  className={isHistory ? 'imgactive' : ''} src={triangle}/></h4>
                 {isHistory && 
-                historyArr.sort((a, b) => a.id - b.id).reverse().map((el, index) => {
+                historyArr.sort((a, b) => +a.id - +b.id).reverse().map((el, index) => {
                     let allMins = (+el.ehours - +el.shours) * 60 + (+el.emins - +el.smins)
                     let allHours = Math.floor(allMins / 60)
                     return (
