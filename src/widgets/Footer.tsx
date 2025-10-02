@@ -16,9 +16,6 @@ export default function Footer():JSX.Element{
                 <a href="https://github.com/adattoweb" target="_blank" className="footer-two-item github">
                     <img src={github} alt="" />
                 </a>
-                <a href="https://t.me/adattoweb" target="_blank" className="footer-two-item telegram">
-                    <img src={telegram} alt="" />
-                </a>
             </div>
         </footer>
     )
